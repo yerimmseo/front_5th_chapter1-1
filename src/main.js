@@ -244,20 +244,32 @@ const ProfilePage = () => /*html*/ `
 `;
 
 const App = () => {
-  if (location.pathname === "/") {
+  const getPath = () => {
+    if (location.hash) {
+      return location.hash.replace("#", "") || "/";
+    }
+
+    return location.pathname;
+  };
+
+  const path = getPath();
+
+  if (path === "/") {
     return MainPage();
   }
-  if (location.pathname === "/login") {
-    return LoginPage();
+  if (path === "/login") {
+    return state.isLoggedIn ? MainPage() : LoginPage();
   }
-  if (location.pathname === "/profile") {
-    if (!state.isLoggedIn) {
-      return LoginPage();
-    }
-    return ProfilePage();
+  if (path === "/profile") {
+    return !state.isLoggedIn ? LoginPage() : ProfilePage();
   }
+
   return ErrorPage();
 };
+
+window.addEventListener("hashchange", () => {
+  render();
+});
 
 window.addEventListener("popstate", () => {
   render();
