@@ -21,7 +21,7 @@ const Header = ({ isLoggedIn }) => {
 
     <nav class="bg-white shadow-md p-2 sticky top-14">
       <ul class="flex justify-around">
-        <li><a href="/" class="text-${currentPathName === "/" ? "blue" : "gray"}-600">홈</a></li>
+        <li><a href="/" class="${currentPathName === "/" ? "text-blue-600 font-bold" : "text-gray-600"}">홈</a></li>
         ${nav}
       </ul>
     </nav>
@@ -258,10 +258,18 @@ const App = () => {
     return MainPage();
   }
   if (path === "/login") {
-    return state.isLoggedIn ? MainPage() : LoginPage();
+    if (state.isLoggedIn) {
+      history.pushState(null, "", "/");
+      return MainPage();
+    }
+    return LoginPage();
   }
   if (path === "/profile") {
-    return !state.isLoggedIn ? LoginPage() : ProfilePage();
+    if (!state.isLoggedIn) {
+      history.pushState(null, "", "/login");
+      return LoginPage();
+    }
+    return ProfilePage();
   }
 
   return ErrorPage();
@@ -279,13 +287,17 @@ const render = () => {
   document.getElementById("root").innerHTML = App();
 
   // 메뉴 이벤트
-  document.querySelectorAll("a").forEach((el) => {
-    el.addEventListener("click", (e) => {
+  document.getElementById("root").addEventListener("click", (e) => {
+    if (e.target.tagName === "A") {
+      if (e.preventDefault) {
+        return;
+      }
+
       e.preventDefault();
       const pathName = e.target.href.replace(location.origin, "");
       history.pushState(null, "", pathName);
       render();
-    });
+    }
   });
 
   // 로그인 폼 이벤트
