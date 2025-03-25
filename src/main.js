@@ -289,7 +289,7 @@ const render = () => {
   // 메뉴 이벤트
   document.getElementById("root").addEventListener("click", (e) => {
     if (e.target.tagName === "A") {
-      if (e.preventDefault) {
+      if (e.defaultPrevented) {
         return;
       }
 
