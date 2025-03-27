@@ -1,4 +1,4 @@
-(function(){const t=document.createElement("link").relList;if(t&&t.supports&&t.supports("modulepreload"))return;for(const e of document.querySelectorAll('link[rel="modulepreload"]'))s(e);new MutationObserver(e=>{for(const n of e)if(n.type==="childList")for(const a of n.addedNodes)a.tagName==="LINK"&&a.rel==="modulepreload"&&s(a)}).observe(document,{childList:!0,subtree:!0});function r(e){const n={};return e.integrity&&(n.integrity=e.integrity),e.referrerPolicy&&(n.referrerPolicy=e.referrerPolicy),e.crossOrigin==="use-credentials"?n.credentials="include":e.crossOrigin==="anonymous"?n.credentials="omit":n.credentials="same-origin",n}function s(e){if(e.ep)return;e.ep=!0;const n=r(e);fetch(e.href,n)}})();const c={get(o){return localStorage.getItem(o)},set(o,t){localStorage.setItem(o,typeof t=="object"?JSON.stringify(t):t)},remove(o){localStorage.removeItem(o)},clear(){localStorage.clear()}},h=(o,t={})=>{let r=t;const s=[],e=()=>r,n=l=>{r=o(r,l),i()},a=l=>(s.push(l),()=>{const u=s.indexOf(l);u>-1&&l.splice(u,1)}),i=()=>{s.forEach(l=>l(r))};return{getState:e,dispatch:n,subscribe:a}},v=(o,t)=>{const{type:r,payload:s}=t;switch(r){case"LOGIN":{const{username:e}=s,n={username:e,email:"",bio:""};return c.set("user",n),{...o,isLoggedIn:!0,userInfo:n}}case"LOGOUT":return c.remove("user"),{...o,isLoggedIn:!1,userInfo:{}};case"UPDATE_PROFILE":{const e={...o.userInfo,...s};return c.set("user",e),{...o,userInfo:e}}default:return o}},x={isLoggedIn:!!c.get("user"),userInfo:JSON.parse(c.get("user"))||{}},d=h(v,x),m=()=>{const{navigate:o}=f(),t=()=>{const e=document.getElementById("logout");e&&e.addEventListener("click",n=>{n.preventDefault(),d.dispatch({type:"LOGOUT"}),o("/login")})};return{init:()=>{t()},render:({isLoggedIn:e})=>{const n=location.pathname;return`
+(function(){const t=document.createElement("link").relList;if(t&&t.supports&&t.supports("modulepreload"))return;for(const e of document.querySelectorAll('link[rel="modulepreload"]'))s(e);new MutationObserver(e=>{for(const n of e)if(n.type==="childList")for(const a of n.addedNodes)a.tagName==="LINK"&&a.rel==="modulepreload"&&s(a)}).observe(document,{childList:!0,subtree:!0});function r(e){const n={};return e.integrity&&(n.integrity=e.integrity),e.referrerPolicy&&(n.referrerPolicy=e.referrerPolicy),e.crossOrigin==="use-credentials"?n.credentials="include":e.crossOrigin==="anonymous"?n.credentials="omit":n.credentials="same-origin",n}function s(e){if(e.ep)return;e.ep=!0;const n=r(e);fetch(e.href,n)}})();const d={get(o){return localStorage.getItem(o)},set(o,t){localStorage.setItem(o,typeof t=="object"?JSON.stringify(t):t)},remove(o){localStorage.removeItem(o)},clear(){localStorage.clear()}},v=(o,t={})=>{let r=t;const s=[],e=()=>r,n=l=>{r=o(r,l),i()},a=l=>(s.push(l),()=>{const u=s.indexOf(l);u>-1&&l.splice(u,1)}),i=()=>{s.forEach(l=>l(r))};return{getState:e,dispatch:n,subscribe:a}},x=(o,t)=>{const{type:r,payload:s}=t;switch(r){case"LOGIN":{const{username:e}=s,n={username:e,email:"",bio:""};return d.set("user",n),{...o,isLoggedIn:!0,userInfo:n}}case"LOGOUT":return d.remove("user"),{...o,isLoggedIn:!1,userInfo:{}};case"UPDATE_PROFILE":{const e={...o.userInfo,...s};return d.set("user",e),{...o,userInfo:e}}default:return o}},y={isLoggedIn:!!d.get("user"),userInfo:JSON.parse(d.get("user"))||{}},c=v(x,y),m=()=>{const{navigate:o}=f(),t=()=>{const e=document.getElementById("logout");e&&e.addEventListener("click",n=>{n.preventDefault(),c.dispatch({type:"LOGOUT"}),o("/login")})};return{init:()=>{t()},render:({isLoggedIn:e})=>{const n=location.pathname;return`
       <header class="bg-blue-600 text-white p-4 sticky top-0">
         <h1 class="text-2xl font-bold">항해플러스</h1>
       </header>
@@ -25,7 +25,7 @@
     <footer class="bg-gray-200 p-4 text-center">
       <p>&copy; 2024 항해플러스. All rights reserved.</p>
     </footer>
-  `,y=()=>[{id:1,author:"홍길동",createdAt:"5분 전",content:"오늘 날씨가 정말 좋네요. 다들 좋은 하루 보내세요!"},{id:2,author:"김철수",createdAt:"15분 전",content:"새로운 프로젝트를 시작했어요. 열심히 코딩 중입니다!"},{id:3,author:"이영희",createdAt:"30분 전",content:"오늘 점심 메뉴 추천 받습니다. 뭐가 좋을까요?"},{id:4,author:"박민수",createdAt:"1시간 전",content:"주말에 등산 가실 분 계신가요? 함께 가요!"},{id:5,author:"정수연",createdAt:"2시간 전",content:"새로 나온 영화 재미있대요. 같이 보러 갈 사람?"}].map(t=>`
+  `,w=()=>[{id:1,author:"홍길동",createdAt:"5분 전",content:"오늘 날씨가 정말 좋네요. 다들 좋은 하루 보내세요!"},{id:2,author:"김철수",createdAt:"15분 전",content:"새로운 프로젝트를 시작했어요. 열심히 코딩 중입니다!"},{id:3,author:"이영희",createdAt:"30분 전",content:"오늘 점심 메뉴 추천 받습니다. 뭐가 좋을까요?"},{id:4,author:"박민수",createdAt:"1시간 전",content:"주말에 등산 가실 분 계신가요? 함께 가요!"},{id:5,author:"정수연",createdAt:"2시간 전",content:"새로 나온 영화 재미있대요. 같이 보러 갈 사람?"}].map(t=>`
       <div class="bg-white rounded-lg shadow p-4" data-id=${t.id}>
         <div class="flex items-center mb-2">
           <img src="https://placehold.co/40" alt="프로필" class="rounded-full mr-2">
@@ -41,7 +41,7 @@
           <button>공유</button>
         </div>
       </div>
-    `).join(""),w=()=>{const{isLoggedIn:o}=d.getState(),t=m();return{init:()=>{t.init()},render:()=>`
+    `).join(""),I=()=>{const{isLoggedIn:o}=c.getState(),t=m();return{init:()=>{t.init()},render:()=>`
     <div class="bg-gray-100 min-h-screen flex justify-center">
       <div class="max-w-md w-full">
         ${t.render({isLoggedIn:o})}
@@ -53,14 +53,14 @@
           </div>
 
           <div class="space-y-4">
-            ${y()}
+            ${w()}
           </div>
         </main>
 
         ${p()}
       </div>
     </div>
-  `}},I=()=>{const{navigate:o}=f(),t=()=>{const e=document.getElementById("login-form");e&&e.addEventListener("submit",n=>{n.preventDefault();const a=document.getElementById("username").value;a&&(d.dispatch({type:"LOGIN",payload:{username:a}}),o("/"))})};return{init:()=>{t()},render:()=>`
+  `}},L=()=>{const{navigate:o}=f(),t=()=>{const e=document.getElementById("login-form");e&&e.addEventListener("submit",n=>{n.preventDefault();const a=document.getElementById("username").value;a&&(c.dispatch({type:"LOGIN",payload:{username:a}}),o("/"))})};return{init:()=>{t()},render:()=>`
     <main class="bg-gray-100 flex items-center justify-center min-h-screen">
       <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
         <h1 class="text-2xl font-bold text-center text-blue-600 mb-8">항해플러스</h1>
@@ -82,7 +82,7 @@
         </div>
       </div>
     </main>
-  `}},L=()=>({render:()=>`
+  `}},E=()=>({render:()=>`
     <main class="bg-gray-100 flex items-center justify-center min-h-screen">
       <div class="bg-white p-8 rounded-lg shadow-md w-full text-center" style="max-width: 480px">
         <h1 class="text-2xl font-bold text-blue-600 mb-4">항해플러스</h1>
@@ -96,7 +96,7 @@
         </a>
       </div>
     </main>
-  `}),E=()=>{const{isLoggedIn:o,userInfo:t}=d.getState(),r=m(),s=()=>{const a=document.getElementById("profile-form");a&&a.addEventListener("submit",i=>{i.preventDefault();const l=document.getElementById("username").value,u=document.getElementById("email").value,b=document.getElementById("bio").value,g={username:l,email:u,bio:b};d.dispatch({type:"UPDATE_PROFILE",payload:g})})};return{init:()=>{r.init(),s()},render:()=>`
+  `}),$=()=>{const{isLoggedIn:o,userInfo:t}=c.getState(),r=m(),s=()=>{const a=document.getElementById("profile-form");a&&a.addEventListener("submit",i=>{i.preventDefault();const l=document.getElementById("username").value,u=document.getElementById("email").value,g=document.getElementById("bio").value,h={username:l,email:u,bio:g};c.dispatch({type:"UPDATE_PROFILE",payload:h})})};return{init:()=>{r.init(),s()},render:()=>`
     <div id="root">
       <div class="bg-gray-100 min-h-screen flex justify-center">
         <div class="max-w-md w-full">
@@ -164,4 +164,4 @@
         </div>
       </div>
     </div>
-  `}},f=()=>{const o={"/":{component:w},"/login":{component:I,beforeEnter:()=>{const{isLoggedIn:e}=d.getState();return e?(history.pushState(null,"","/"),!1):!0}},"/profile":{component:E,beforeEnter:()=>{const{isLoggedIn:e}=d.getState();return e?!0:(history.pushState(null,"","/login"),!1)}},404:{component:L}},t=()=>location.hash?location.hash.replace("#","")||"/":location.pathname,r=e=>{const n=o[e]||o[404];if(n.beforeEnter&&!n.beforeEnter()){r(t());return}const{component:a}=n,{init:i,render:l}=a();history.pushState(null,"",e),document.getElementById("root").innerHTML=l(),i&&i()};return{init:()=>{window.addEventListener("hashchange",()=>{r(t())}),window.addEventListener("popstate",()=>{r(t())}),document.body.addEventListener("click",e=>{if(e.target.tagName==="A"){if(e.defaultPrevented)return;e.preventDefault();const n=e.target.href.replace(location.origin,"");r(n)}}),r(t())},navigate:r}},$=f();$.init();
+  `}},f=()=>{const o={"/":{component:I},"/login":{component:L,beforeEnter:()=>{const{isLoggedIn:e}=c.getState();return e?(history.pushState(null,"","/"),!1):!0}},"/profile":{component:$,beforeEnter:()=>{const{isLoggedIn:e}=c.getState();return e?!0:(history.pushState(null,"","/login"),!1)}},404:{component:E}},t=()=>location.hash?location.hash.replace("#","")||"/":location.pathname,r=e=>{const n=o[e]||o[404];if(n.beforeEnter&&!n.beforeEnter()){r(t());return}const{component:a}=n,{init:i,render:l}=a();history.pushState(null,"",e),document.getElementById("root").innerHTML=l(),i&&i()};return{init:()=>{window.addEventListener("hashchange",()=>{r(t())}),window.addEventListener("popstate",()=>{r(t())}),document.body.addEventListener("click",e=>{if(e.target.tagName==="A"){if(e.defaultPrevented)return;e.preventDefault();const n=e.target.href.replace(location.origin,"");r(n)}}),r(t())},navigate:r}},b=f();store.subscribe(()=>{const o=location.hash.slice(1)||"/";b.navigate(o)});b.init();
